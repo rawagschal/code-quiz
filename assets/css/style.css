@@ -1,13 +1,26 @@
-.body {
+body {
     background: white;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    font-family: Helvetica, sans-serif;
     text-decoration: none;
+    font-family: Helvetica, sans-serif;
 }
 
-.header {
-
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
 }
+
+header p {
+    /* get rid of the auto margins for <p>s */
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+header a {
+    color: violet;
+}
+
