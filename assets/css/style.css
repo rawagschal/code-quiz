@@ -8,22 +8,25 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
+/* header styles start*/
 header {
     display: flex;
     justify-content: space-between;
     padding: 15px;
 }
 
-header p {
+.timer {
     /* get rid of the auto margins for <p>s */
     margin-block-start: 0;
     margin-block-end: 0;
 }
 
 header a {
-    color: violet;
+    color: #eb70e0;
 }
+/*header styles end*/
 
+/*quiz section styles start*/
 .quiz-wrapper {
     padding: 50px 100px;
     display: flex;
@@ -35,3 +38,21 @@ header a {
 h1 {
     margin: 0;
 }
+
+button {
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px;
+    transition-duration: .4s;
+}
+
+button:hover {
+    background-color: #eb70e0;
+}
+
+/*quiz section styles end*/
+
+
+
