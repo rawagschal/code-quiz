@@ -7,3 +7,4 @@ A timed quiz on JavaScript fundamentals with a high score board.
 * HTML
 * CSS
 * JavaScript
+![screenshot to show javascript is working](./assets/images/ex1.png)
