@@ -32,6 +32,7 @@ header a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-items: center;
     text-align: center;
 }
 
@@ -50,6 +51,10 @@ button {
 
 button:hover {
     background-color: #eb70e0;
+}
+
+.hide {
+    display: none;
 }
 
 /*quiz section styles end*/
