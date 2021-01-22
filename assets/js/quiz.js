@@ -29,15 +29,15 @@ var questions = [
 // quiz state vars
 var questionIndex = 0;
 var time = questions.length * 15;
-
+var timerId;
 
 
 // element vars w/ El suffix to identify as a DOM element
 var quizEl = document.getElementById("quiz-screen");
-var startBtnEl = document.getElementById("start-quiz");
 var timerEl = document.getElementById("time");
-var questionEl = document.getElementById("question");
+var startBtnEl = document.getElementById("start-quiz");
 var optionsEl = document.getElementById("options");
+var hintEl = document.getElementById("hint");
 var initialsEl = document.getElementById("initials");
 var submitBtnEl = document.getElementById("submit");
 
@@ -48,9 +48,96 @@ startBtnEl.onclick = startQuiz;
 function startQuiz() {
     var startScreen = document.getElementById("start-screen");
     startScreen.setAttribute("class", "hide");
-
+    
+    // show quiz-screen
     quizEl.removeAttribute("class");
+
+    // start timer
+    timerId = setInterval(updateTime, 1000);
+
+    // show time
+    timerEl.textContent = time;
+
+    getQuestion();
 };
+
+function getQuestion() {
+    // get current question
+    var currentQuestion = questions[questionIndex];
+
+    // show current question
+    var questionEl = document.getElementById("question");
+    questionEl.textContent = currentQuestion.question
+
+    // clear any options from previous question
+    optionsEl.innerHTML = "";
+
+    // loop over options
+    currentQuestion.options.forEach(function(option) {
+        // button for each option
+        var optionBtn = document.createElement("button");
+        optionBtn.setAttribute("value", option);
+        optionBtn.setAttribute("class", "option");
+        optionBtn.setAttribute("id", "option");
+        optionBtn.textContent = option;
+
+        optionBtn.onclick = optionClick;
+
+        // append button to display with options
+        optionsEl.appendChild(optionBtn);
+
+    });
+}
+
+function optionClick() {
+
+    //incorrect guess
+    if (this.value !== questions[questionIndex].answer) {
+        console.log(this.value);
+        // take away time
+        time -= 10;
+
+        // handle negative time
+        if (time < 0) {
+            time = 0;
+        }
+
+        // display new time
+        timerEl.textContent = time;
+        
+        // display hint
+        hintEl.textContent = "Wrong Answer!"
+    } else {
+        hintEl.textContent = "Nice Job!";
+    }
+
+    // flash hint for only a second
+    setTimeout(function() { 
+        hintEl.setAttribute("class", "hint hide");
+    }, 1000);
+
+    questionIndex++;
+
+    // check if no more questions
+    if (questionIndex === questions.length) {
+        // endQuiz();
+        console.log("that was the last question")
+    } else {
+        getQuestion();
+    }
+}
+
+function updateTime() {
+    // update time every 1000ms according to setInterval() in getQuestion()
+    time--;
+    timerEl.textContent = time;
+
+    // end quiz when time = 0
+    if (time <= 0) {
+        console.log("Time's up");
+        // endQuiz();
+    }
+}
 
 
 
