@@ -57,6 +57,13 @@ button:hover {
     display: none;
 }
 
+.option.wrong {
+    background-color: red;
+}
+
+.option.right {
+    background-color: lightgreen;
+}
 
 
 /*quiz section styles end*/

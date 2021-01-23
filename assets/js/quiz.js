@@ -62,6 +62,7 @@ function startQuiz() {
 };
 
 function getQuestion() {
+
     // get current question
     var currentQuestion = questions[questionIndex];
 
@@ -105,16 +106,21 @@ function optionClick() {
         // display new time
         timerEl.textContent = time;
         
+        // change button color 
+        optionBtn = this.setAttribute("class", "option wrong");
+        
         // display hint
         hintEl.textContent = "Wrong Answer!"
     } else {
+        optionBtn = this.setAttribute("class", "option right");
         hintEl.textContent = "Nice Job!";
     }
 
     // flash hint for only a second
+    hintEl.setAttribute("class", "hint");
     setTimeout(function() { 
         hintEl.setAttribute("class", "hint hide");
-    }, 1000);
+    }, 2000);
 
     questionIndex++;
 
@@ -123,7 +129,9 @@ function optionClick() {
         // endQuiz();
         console.log("that was the last question")
     } else {
-        getQuestion();
+        setTimeout(function() {
+            getQuestion();
+        }, 2000);
     }
 }
 
@@ -135,7 +143,7 @@ function updateTime() {
     // end quiz when time = 0
     if (time <= 0) {
         console.log("Time's up");
-        // endQuiz();
+        endQuiz();
     }
 }
 
