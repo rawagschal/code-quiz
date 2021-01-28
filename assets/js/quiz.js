@@ -100,7 +100,10 @@ function optionClick() {
 
         // handle negative time
         if (time < 0) {
-            time = 0;
+            time === 0;
+            setTimeout(function() {
+                endQuiz();
+            }, 2000);
         }
 
         // display new time
@@ -126,8 +129,9 @@ function optionClick() {
 
     // check if no more questions
     if (questionIndex === questions.length) {
-        // endQuiz();
-        console.log("that was the last question")
+        setTimeout(function() {
+            endQuiz();
+        }, 2000);
     } else {
         setTimeout(function() {
             getQuestion();
@@ -143,10 +147,55 @@ function updateTime() {
     // end quiz when time = 0
     if (time <= 0) {
         console.log("Time's up");
-        endQuiz();
+        setTimeout(function() {
+            endQuiz();
+        }, 2000);
     }
 }
 
+function endQuiz() {
+    // stop timer 
+    clearInterval(timerId);
 
+    // show end screen
+    var endScreenEl = document.getElementById("end-screen");
+    endScreenEl.removeAttribute("class");
 
+    // show final score
+    var finalScoreEl = document.getElementById("final-score");
+    finalScoreEl.textContent = time;
 
+    // hide quiz screen
+    quizEl.setAttribute("class", "hide");
+}
+
+function saveHighscore() {
+    // get initials from dom el and trim whitespace
+    var initials = initialsEl.value.trim();
+
+    // if entered, save score
+    if (initials !== "") {
+        // get any saved scores or save to empty array
+        var highscores = 
+        JSON.parse(window.localstorage.getItem("highscores")) || [];
+
+        // new score object
+        var newScore = {
+            score: time,
+            initials: initials
+        };
+
+        //save to local storage
+        highscores.push(newScore);
+        window.localstorage.setItem("highscores", JSON.stringify(highscores));
+
+        // redirect to highscores page
+        window.location.href = "scoreboard.html";
+
+     };
+    // else {
+    //     window.alert("You need to enter your initials to save your score!");
+    // };
+}
+
+submitBtnEl.onclick = saveHighscore;

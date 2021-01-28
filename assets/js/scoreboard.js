@@ -1,0 +1,3 @@
+function showHighscores() {
+    var highscores 
+}
