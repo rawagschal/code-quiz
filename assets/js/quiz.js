@@ -44,6 +44,8 @@ var submitBtnEl = document.getElementById("submit");
 
 startBtnEl.onclick = startQuiz;
 
+// submitBtnEl.onclick = saveHighscore;
+
 // start quiz function
 function startQuiz() {
     var startScreen = document.getElementById("start-screen");
@@ -169,6 +171,8 @@ function endQuiz() {
     quizEl.setAttribute("class", "hide");
 }
 
+submitBtnEl.onclick = saveHighscore;
+
 function saveHighscore() {
     // get initials from dom el and trim whitespace
     var initials = initialsEl.value.trim();
@@ -198,4 +202,4 @@ function saveHighscore() {
     // };
 }
 
-submitBtnEl.onclick = saveHighscore;
+
